@@ -67,7 +67,6 @@ def generate_state_alert(pandas_df, specific_list):
             state_check_alerts.extend(unexpected_rows[['row_number', 'COLUMN']].to_dict(orient='records'))
 
         quality_control_alerts["state_check"] = state_check_alerts
-        logger.info("state_check_alerts : \n" + str(state_check_alerts[0:5]))
         pandas_df.drop(columns=['row_number'], inplace=True)
         quality_control_alerts["state_check"] = state_check_alerts
         logger.info(state_check_alerts[0:5])

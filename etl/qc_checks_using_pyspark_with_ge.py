@@ -22,43 +22,39 @@ def get_great_expectations_dataframe(spark, spark_df):
     except Exception as e:
         logger.error('Exception e : ' + str(e))
 
-# Special Characters Check : Defining Expectation
-def expect_column_values_to_not_have_special_characters_except_commas(self, spark, spark_df, column):
+# Special Characters Check
+def generate_special_characters_alert(spark, spark_df):
     try:
         logger = Log4j(spark)
         spark_df = get_spark_df_with_row_number(spark, spark_df)
-        logger.info("Regular expression to match special characters")
-        regex_pattern = r"[\!\@\$\^\&\-\_\;\:\?\.\#\*\<\>]" if column == "ADDRESS" else r"[\!\@\$\^\&\-\_\;\:\?\.\#\*\<\>\,]"
-
-        logger.info("Applying the regex to check for special characters in " + column)
-        special_character_rows = spark_df.filter(spark_df[column].rlike(regex_pattern))
-        special_character_rows = special_character_rows.select("row_number").collect()
-        logger.info(column + ": " + str(len(special_character_rows)))
-        return special_character_rows
-    except Exception as e:
-        logger.error('Exception e : ' + str(e))
-
-
-# Special Characters Check : Generating QC Alert
-def generate_special_characters_qc_alert(spark, spark_df):
-    try:
-        logger = Log4j(spark)
-        MetaSparkDFDataset.expect_column_values_to_not_have_special_characters_except_commas = expect_column_values_to_not_have_special_characters_except_commas
-        df_ge = get_great_expectations_dataframe(spark, spark_df)
-        logger.info("Initialize the alert list")
+        ge_df = get_great_expectations_dataframe(spark, spark_df)
         special_characters_alerts = []
-        logger.info("Run the custom expectation on each column")
-        for col in spark_df.columns:
-            if col == "row_number":
-                continue
-            special_character_rows = df_ge.expect_column_values_to_not_have_special_characters_except_commas(spark, spark_df, col)
-            for row in special_character_rows:
-                special_characters_alerts.append({"row_number":row['row_number'], "COLUMN":col})
+        special_characters_check_fails = []
 
-        logger.info("Prepare the final JSON output")
-        quality_control_alerts["special_characters_check"] =  special_characters_alerts
-        logger.info("special_character_alerts_count : "+ str(len(quality_control_alerts["special_characters_check"])))
-        logger.info(special_characters_alerts[0:5])
+        logger.info("Regular expression to match special characters")
+
+        for column in spark_df.columns:
+            logger.info("Running check for : " + column)
+            if column == "row_number":
+                logger.info("Skipping check for row_number")
+                continue
+            regex_pattern = r"[\!\@\$\^\&\-\_\;\:\?\.\#\*\<\>]" if column == "ADDRESS" else r"[\!\@\$\^\&\-\_\;\:\?\.\#\*\<\>\,]"
+            logger.info("Applying the regex to check for special characters in " + column)
+            expectation_outcome = ge_df.expect_column_values_to_not_match_regex(column, regex_pattern, result_format="COMPLETE")
+            special_characters_check_fails.append(expectation_outcome["result"]["unexpected_count"])
+            logger.info(column + " : " + str(expectation_outcome["result"]["unexpected_count"]))
+            if expectation_outcome["result"].get("unexpected_list", None):
+                special_character_rows = spark_df.filter(spark_df[column].rlike(regex_pattern))
+                special_character_rows = special_character_rows.select("row_number").collect()
+                for row in special_character_rows:
+                    special_characters_alerts.append({"row_number":row['row_number'], "COLUMN":column})
+
+
+
+        logger.info("total_check_fails : " + str(sum(special_characters_check_fails)))
+        logger.info("special_character_alerts_count : " + str(len(special_characters_alerts)))
+        logger.info("special_character_alerts : \n" + str(special_characters_alerts[0:5]))
+        quality_control_alerts["special_characters_check"] = special_characters_alerts
     except Exception as e:
         logger.error('Exception e : ' + str(e))
 
@@ -68,9 +64,7 @@ def generate_country_alert(spark, spark_df, specific_value):
         logger = Log4j(spark)
         ge_df = get_great_expectations_dataframe(spark, spark_df)
         result_set = ge_df.expect_column_values_to_be_in_set(column="COUNTRY", value_set=[specific_value])
-        logger.info(str(result_set))
         result_set_for_nulls = ge_df.expect_column_values_to_not_be_null(column="COUNTRY")
-        logger.info(str(result_set_for_nulls))
         spark_df = get_spark_df_with_row_number(spark, spark_df)
         filtered_df = spark_df.filter(~spark_df["COUNTRY"].isin([specific_value]) | spark_df["COUNTRY"].isNull())
         country_check_alerts = [{"row_number": row.row_number, "COLUMN": "COUNTRY"} for row in filtered_df.collect()]

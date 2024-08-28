@@ -1,169 +1,99 @@
-24/08/28 11:23:12 INFO data_quality_app: SparkSession variable : <pyspark.sql.session.SparkSession object at 0x0000019CFEEC59D0>
-24/08/28 11:23:12 INFO data_quality_app: sparkContext variable : <SparkContext master=local[*] appName=data_quality_app>
-24/08/28 11:23:24 INFO data_quality_app: File read successfully...
-24/08/28 11:23:30 INFO data_quality_app: Record count: 1000000
-24/08/28 11:23:30 INFO data_quality_app: Initialize the alert list
-24/08/28 11:23:30 INFO data_quality_app: Run the custom expectation on each column
-24/08/28 11:23:30 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:23:30 INFO data_quality_app: Applying the regex to check for special characters in EMP_ID
-24/08/28 11:23:51 INFO data_quality_app: EMP_ID: 0
-24/08/28 11:23:52 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:23:52 INFO data_quality_app: Applying the regex to check for special characters in FIRST_NAME
-24/08/28 11:23:58 INFO data_quality_app: FIRST_NAME: 37908
-24/08/28 11:23:58 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:23:58 INFO data_quality_app: Applying the regex to check for special characters in LAST_NAME
-24/08/28 11:23:59 INFO data_quality_app: LAST_NAME: 38494
-24/08/28 11:23:59 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:23:59 INFO data_quality_app: Applying the regex to check for special characters in ADDRESS
-24/08/28 11:24:02 INFO data_quality_app: ADDRESS: 142376
-24/08/28 11:24:03 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:03 INFO data_quality_app: Applying the regex to check for special characters in CITY
-24/08/28 11:24:06 INFO data_quality_app: CITY: 38224
-24/08/28 11:24:06 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:06 INFO data_quality_app: Applying the regex to check for special characters in STATE
-24/08/28 11:24:07 INFO data_quality_app: STATE: 0
-24/08/28 11:24:07 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:07 INFO data_quality_app: Applying the regex to check for special characters in COUNTRY
-24/08/28 11:24:07 INFO data_quality_app: COUNTRY: 0
-24/08/28 11:24:07 INFO data_quality_app: Prepare the final JSON output
-24/08/28 11:24:07 INFO data_quality_app: special_character_alerts_count : 257002
-24/08/28 11:24:07 INFO data_quality_app: [{COLUMN=FIRST_NAME, row_number=20}, {COLUMN=FIRST_NAME, row_number=27}, {COLUMN=FIRST_NAME, row_number=46}, {COLUMN=FIRST_NAME, row_number=186}, {COLUMN=FIRST_NAME, row_number=193}]
-24/08/28 11:24:09 INFO data_quality_app: {
-  "success": false,
-  "expectation_config": {
-    "expectation_type": "expect_column_values_to_be_in_set",
-    "kwargs": {
-      "column": "COUNTRY",
-      "value_set": [
-        "India"
-      ],
-      "result_format": "BASIC"
-    },
-    "meta": {}
-  },
-  "result": {
-    "element_count": 1000000,
-    "missing_count": 0,
-    "missing_percent": 0.0,
-    "unexpected_count": 50232,
-    "unexpected_percent": 5.0232,
-    "unexpected_percent_total": 5.0232,
-    "unexpected_percent_nonmissing": 5.0232,
-    "partial_unexpected_list": [
-      "Argentina",
-      "Taiwan",
-      "Australia",
-      "Algeria",
-      "Cape Verde",
-      "Algeria",
-      "Taiwan",
-      "New Caledonia",
-      "New Caledonia",
-      "Algeria",
-      "Argentina",
-      "Taiwan",
-      "Algeria",
-      "Taiwan",
-      "Argentina",
-      "New Caledonia",
-      "Netherlands",
-      "Australia",
-      "Taiwan",
-      "Cape Verde"
-    ]
-  },
-  "meta": {},
-  "exception_info": {
-    "raised_exception": false,
-    "exception_traceback": null,
-    "exception_message": null
-  }
-}
-24/08/28 11:24:10 INFO data_quality_app: {
-  "success": true,
-  "expectation_config": {
-    "expectation_type": "expect_column_values_to_not_be_null",
-    "kwargs": {
-      "column": "COUNTRY",
-      "result_format": "BASIC"
-    },
-    "meta": {}
-  },
-  "result": {
-    "element_count": 1000000,
-    "unexpected_count": 0,
-    "unexpected_percent": 0.0,
-    "unexpected_percent_total": 0.0,
-    "partial_unexpected_list": []
-  },
-  "meta": {},
-  "exception_info": {
-    "raised_exception": false,
-    "exception_traceback": null,
-    "exception_message": null
-  }
-}
-24/08/28 11:24:11 INFO data_quality_app: country_check_alerts_count : 50232
-24/08/28 11:24:11 INFO data_quality_app: country_check_alerts_count : 50232
-24/08/28 11:24:11 INFO data_quality_app: country_check_null_count : 0
-24/08/28 11:24:11 INFO data_quality_app: [{COLUMN=COUNTRY, row_number=41}, {COLUMN=COUNTRY, row_number=50}, {COLUMN=COUNTRY, row_number=77}, {COLUMN=COUNTRY, row_number=112}, {COLUMN=COUNTRY, row_number=127}]
-24/08/28 11:24:16 INFO data_quality_app: state_check_alerts_count : 97724
-24/08/28 11:24:16 INFO data_quality_app: state_check_alerts_count : 97724
-24/08/28 11:24:16 INFO data_quality_app: state_check_null_count : 48742
-24/08/28 11:24:16 INFO data_quality_app: [{COLUMN=STATE, row_number=3}, {COLUMN=STATE, row_number=8}, {COLUMN=STATE, row_number=12}, {COLUMN=STATE, row_number=24}, {COLUMN=STATE, row_number=41}]
-24/08/28 11:24:17 INFO data_quality_app: Null count for EMP_ID : 0
-24/08/28 11:24:18 INFO data_quality_app: Null count for FIRST_NAME : 495219
-24/08/28 11:24:19 INFO data_quality_app: Blank count for FIRST_NAME : 0
-24/08/28 11:24:24 INFO data_quality_app: Null count for LAST_NAME : 495632
-24/08/28 11:24:25 INFO data_quality_app: Blank count for LAST_NAME : 0
-24/08/28 11:24:32 INFO data_quality_app: Null count for ADDRESS : 494902
-24/08/28 11:24:33 INFO data_quality_app: Blank count for ADDRESS : 0
-24/08/28 11:24:39 INFO data_quality_app: Null count for CITY : 495008
-24/08/28 11:24:40 INFO data_quality_app: Blank count for CITY : 0
-24/08/28 11:24:45 INFO data_quality_app: Null count for STATE : 48742
-24/08/28 11:24:46 INFO data_quality_app: Blank count for STATE : 0
-24/08/28 11:24:48 INFO data_quality_app: Null count for COUNTRY : 0
-24/08/28 11:24:48 INFO data_quality_app: Blank count for COUNTRY : 0
-24/08/28 11:24:49 INFO data_quality_app: null_or_blank_check_alerts_count : 2029503
-24/08/28 11:24:49 INFO data_quality_app: [{COLUMN=FIRST_NAME, row_number=1}, {COLUMN=FIRST_NAME, row_number=4}, {COLUMN=FIRST_NAME, row_number=5}, {COLUMN=FIRST_NAME, row_number=6}, {COLUMN=FIRST_NAME, row_number=8}]
-24/08/28 11:24:49 INFO data_quality_app: Initialize the alert list
-24/08/28 11:24:49 INFO data_quality_app: Run the custom expectation on each column
-24/08/28 11:24:49 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:49 INFO data_quality_app: Applying the regex to check for special characters in EMP_ID
-24/08/28 11:24:50 INFO data_quality_app: EMP_ID: 0
-24/08/28 11:24:50 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:50 INFO data_quality_app: Applying the regex to check for special characters in FIRST_NAME
-24/08/28 11:24:50 INFO data_quality_app: FIRST_NAME: 37908
-24/08/28 11:24:50 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:50 INFO data_quality_app: Applying the regex to check for special characters in LAST_NAME
-24/08/28 11:24:51 INFO data_quality_app: LAST_NAME: 38494
-24/08/28 11:24:51 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:51 INFO data_quality_app: Applying the regex to check for special characters in ADDRESS
-24/08/28 11:24:52 INFO data_quality_app: ADDRESS: 142376
-24/08/28 11:24:52 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:52 INFO data_quality_app: Applying the regex to check for special characters in CITY
-24/08/28 11:24:53 INFO data_quality_app: CITY: 38224
-24/08/28 11:24:53 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:53 INFO data_quality_app: Applying the regex to check for special characters in STATE
-24/08/28 11:24:53 INFO data_quality_app: STATE: 0
-24/08/28 11:24:54 INFO data_quality_app: Regular expression to match special characters
-24/08/28 11:24:54 INFO data_quality_app: Applying the regex to check for special characters in COUNTRY
-24/08/28 11:24:54 INFO data_quality_app: COUNTRY: 0
-24/08/28 11:24:54 INFO data_quality_app: Prepare the final JSON output
-24/08/28 11:24:54 INFO data_quality_app: special_character_alerts_count : 257002
-24/08/28 11:24:54 INFO data_quality_app: [{COLUMN=FIRST_NAME, row_number=20}, {COLUMN=FIRST_NAME, row_number=27}, {COLUMN=FIRST_NAME, row_number=46}, {COLUMN=FIRST_NAME, row_number=186}, {COLUMN=FIRST_NAME, row_number=193}]
-24/08/28 11:24:55 INFO data_quality_app: country_check_alerts_count : 50232
-24/08/28 11:24:55 INFO data_quality_app: [{COLUMN=COUNTRY, row_number=41}, {COLUMN=COUNTRY, row_number=50}, {COLUMN=COUNTRY, row_number=77}, {COLUMN=COUNTRY, row_number=112}, {COLUMN=COUNTRY, row_number=127}]
-24/08/28 11:24:57 INFO data_quality_app: state_check_alerts_count : 97724
-24/08/28 11:24:57 INFO data_quality_app: [{COLUMN=STATE, row_number=3}, {COLUMN=STATE, row_number=8}, {COLUMN=STATE, row_number=12}, {COLUMN=STATE, row_number=24}, {COLUMN=STATE, row_number=41}]
-24/08/28 11:24:57 INFO data_quality_app: Null or blank count for EMP_ID : 0
-24/08/28 11:24:58 INFO data_quality_app: Null or blank count for FIRST_NAME : 495219
-24/08/28 11:25:04 INFO data_quality_app: Null or blank count for LAST_NAME : 495632
-24/08/28 11:25:09 INFO data_quality_app: Null or blank count for ADDRESS : 494902
-24/08/28 11:25:14 INFO data_quality_app: Null or blank count for CITY : 495008
-24/08/28 11:25:25 INFO data_quality_app: Null or blank count for STATE : 48742
-24/08/28 11:25:26 INFO data_quality_app: Null or blank count for COUNTRY : 0
-24/08/28 11:25:26 INFO data_quality_app: null_or_blank_check_alerts_count : 2029503
-24/08/28 11:25:26 INFO data_quality_app: [{COLUMN=FIRST_NAME, row_number=1}, {COLUMN=FIRST_NAME, row_number=4}, {COLUMN=FIRST_NAME, row_number=5}, {COLUMN=FIRST_NAME, row_number=6}, {COLUMN=FIRST_NAME, row_number=8}]
-24/08/28 11:25:48 INFO data_quality_app: QC checks completed smoothly
-24/08/28 11:25:49 INFO data_quality_app: Closed spark session and spark context
+24/08/29 01:19:05 INFO data_quality_app: SparkSession variable : <pyspark.sql.session.SparkSession object at 0x0000027C78E02840>
+24/08/29 01:19:05 INFO data_quality_app: sparkContext variable : <SparkContext master=local[*] appName=data_quality_app>
+24/08/29 01:19:14 INFO data_quality_app: File read successfully using pyspark
+24/08/29 01:19:15 INFO data_quality_app: Record count: 1000000
+24/08/29 01:19:17 INFO data_quality_app: File read successfully using pandas
+24/08/29 01:19:17 INFO data_quality_app: Record count: 1000000
+24/08/29 01:19:17 INFO data_quality_app: File read successfully using dask
+24/08/29 01:19:19 INFO data_quality_app: Record count: 1000000
+24/08/29 01:19:19 INFO data_quality_app: Regular expression to match special characters
+24/08/29 01:19:19 INFO data_quality_app: Running check for : EMP_ID
+24/08/29 01:19:19 INFO data_quality_app: Applying the regex to check for special characters in EMP_ID
+24/08/29 01:19:29 INFO data_quality_app: EMP_ID : 0
+24/08/29 01:19:29 INFO data_quality_app: Running check for : FIRST_NAME
+24/08/29 01:19:29 INFO data_quality_app: Applying the regex to check for special characters in FIRST_NAME
+24/08/29 01:19:32 INFO data_quality_app: FIRST_NAME : 37908
+24/08/29 01:19:35 INFO data_quality_app: Running check for : LAST_NAME
+24/08/29 01:19:35 INFO data_quality_app: Applying the regex to check for special characters in LAST_NAME
+24/08/29 01:19:36 INFO data_quality_app: LAST_NAME : 38494
+24/08/29 01:19:39 INFO data_quality_app: Running check for : ADDRESS
+24/08/29 01:19:39 INFO data_quality_app: Applying the regex to check for special characters in ADDRESS
+24/08/29 01:19:42 INFO data_quality_app: ADDRESS : 142376
+24/08/29 01:19:45 INFO data_quality_app: Running check for : CITY
+24/08/29 01:19:45 INFO data_quality_app: Applying the regex to check for special characters in CITY
+24/08/29 01:19:47 INFO data_quality_app: CITY : 38224
+24/08/29 01:19:48 INFO data_quality_app: Running check for : STATE
+24/08/29 01:19:48 INFO data_quality_app: Applying the regex to check for special characters in STATE
+24/08/29 01:19:50 INFO data_quality_app: STATE : 0
+24/08/29 01:19:50 INFO data_quality_app: Running check for : COUNTRY
+24/08/29 01:19:50 INFO data_quality_app: Applying the regex to check for special characters in COUNTRY
+24/08/29 01:19:51 INFO data_quality_app: COUNTRY : 0
+24/08/29 01:19:51 INFO data_quality_app: Running check for : row_number
+24/08/29 01:19:51 INFO data_quality_app: Skipping check for row_number
+24/08/29 01:19:51 INFO data_quality_app: total_check_fails : 257002
+24/08/29 01:19:51 INFO data_quality_app: special_character_alerts_count : 257002
+24/08/29 01:19:51 INFO data_quality_app: special_character_alerts : 
+[{'row_number': 20, 'COLUMN': 'FIRST_NAME'}, {'row_number': 27, 'COLUMN': 'FIRST_NAME'}, {'row_number': 46, 'COLUMN': 'FIRST_NAME'}, {'row_number': 186, 'COLUMN': 'FIRST_NAME'}, {'row_number': 193, 'COLUMN': 'FIRST_NAME'}]
+24/08/29 01:20:00 INFO data_quality_app: country_check_alerts_count : 50232
+24/08/29 01:20:00 INFO data_quality_app: country_check_alerts_count : 50232
+24/08/29 01:20:00 INFO data_quality_app: country_check_null_count : 0
+24/08/29 01:20:00 INFO data_quality_app: [{COLUMN=COUNTRY, row_number=41}, {COLUMN=COUNTRY, row_number=50}, {COLUMN=COUNTRY, row_number=77}, {COLUMN=COUNTRY, row_number=112}, {COLUMN=COUNTRY, row_number=127}]
+24/08/29 01:20:04 INFO data_quality_app: state_check_alerts_count : 97724
+24/08/29 01:20:04 INFO data_quality_app: state_check_alerts_count : 97724
+24/08/29 01:20:04 INFO data_quality_app: state_check_null_count : 48742
+24/08/29 01:20:04 INFO data_quality_app: [{COLUMN=STATE, row_number=3}, {COLUMN=STATE, row_number=8}, {COLUMN=STATE, row_number=12}, {COLUMN=STATE, row_number=24}, {COLUMN=STATE, row_number=41}]
+24/08/29 01:20:05 INFO data_quality_app: Null count for EMP_ID : 0
+24/08/29 01:20:06 INFO data_quality_app: Null count for FIRST_NAME : 495219
+24/08/29 01:20:07 INFO data_quality_app: Blank count for FIRST_NAME : 0
+24/08/29 01:20:13 INFO data_quality_app: Null count for LAST_NAME : 495632
+24/08/29 01:20:14 INFO data_quality_app: Blank count for LAST_NAME : 0
+24/08/29 01:20:19 INFO data_quality_app: Null count for ADDRESS : 494902
+24/08/29 01:20:20 INFO data_quality_app: Blank count for ADDRESS : 0
+24/08/29 01:20:25 INFO data_quality_app: Null count for CITY : 495008
+24/08/29 01:20:26 INFO data_quality_app: Blank count for CITY : 0
+24/08/29 01:20:32 INFO data_quality_app: Null count for STATE : 48742
+24/08/29 01:20:34 INFO data_quality_app: Blank count for STATE : 0
+24/08/29 01:20:36 INFO data_quality_app: Null count for COUNTRY : 0
+24/08/29 01:20:37 INFO data_quality_app: Blank count for COUNTRY : 0
+24/08/29 01:20:37 INFO data_quality_app: null_or_blank_check_alerts_count : 2029503
+24/08/29 01:20:37 INFO data_quality_app: [{COLUMN=FIRST_NAME, row_number=1}, {COLUMN=FIRST_NAME, row_number=4}, {COLUMN=FIRST_NAME, row_number=5}, {COLUMN=FIRST_NAME, row_number=6}, {COLUMN=FIRST_NAME, row_number=8}]
+24/08/29 01:20:37 INFO data_quality_app: Initialize the alert list
+24/08/29 01:20:37 INFO data_quality_app: Run the custom expectation on each column
+24/08/29 01:20:37 INFO data_quality_app: Regular expression to match special characters
+24/08/29 01:20:37 INFO data_quality_app: Applying the regex to check for special characters in EMP_ID
+24/08/29 01:20:38 INFO data_quality_app: EMP_ID: 0
+24/08/29 01:20:39 INFO data_quality_app: Regular expression to match special characters
+24/08/29 01:20:39 INFO data_quality_app: Applying the regex to check for special characters in FIRST_NAME
+24/08/29 01:20:40 INFO data_quality_app: FIRST_NAME: 37908
+24/08/29 01:20:40 INFO data_quality_app: Regular expression to match special characters
+24/08/29 01:20:40 INFO data_quality_app: Applying the regex to check for special characters in LAST_NAME
+24/08/29 01:20:42 INFO data_quality_app: LAST_NAME: 38494
+24/08/29 01:20:42 INFO data_quality_app: Regular expression to match special characters
+24/08/29 01:20:42 INFO data_quality_app: Applying the regex to check for special characters in ADDRESS
+24/08/29 01:20:47 INFO data_quality_app: ADDRESS: 142376
+24/08/29 01:20:48 INFO data_quality_app: Regular expression to match special characters
+24/08/29 01:20:48 INFO data_quality_app: Applying the regex to check for special characters in CITY
+24/08/29 01:20:48 INFO data_quality_app: CITY: 38224
+24/08/29 01:20:49 INFO data_quality_app: Regular expression to match special characters
+24/08/29 01:20:49 INFO data_quality_app: Applying the regex to check for special characters in STATE
+24/08/29 01:20:49 INFO data_quality_app: STATE: 0
+24/08/29 01:20:49 INFO data_quality_app: Regular expression to match special characters
+24/08/29 01:20:49 INFO data_quality_app: Applying the regex to check for special characters in COUNTRY
+24/08/29 01:20:50 INFO data_quality_app: COUNTRY: 0
+24/08/29 01:20:50 INFO data_quality_app: Prepare the final JSON output
+24/08/29 01:20:50 INFO data_quality_app: special_character_alerts_count : 257002
+24/08/29 01:20:50 INFO data_quality_app: [{COLUMN=FIRST_NAME, row_number=20}, {COLUMN=FIRST_NAME, row_number=27}, {COLUMN=FIRST_NAME, row_number=46}, {COLUMN=FIRST_NAME, row_number=186}, {COLUMN=FIRST_NAME, row_number=193}]
+24/08/29 01:20:55 INFO data_quality_app: country_check_alerts_count : 50232
+24/08/29 01:20:55 INFO data_quality_app: [{COLUMN=COUNTRY, row_number=41}, {COLUMN=COUNTRY, row_number=50}, {COLUMN=COUNTRY, row_number=77}, {COLUMN=COUNTRY, row_number=112}, {COLUMN=COUNTRY, row_number=127}]
+24/08/29 01:20:57 INFO data_quality_app: state_check_alerts_count : 97724
+24/08/29 01:20:57 INFO data_quality_app: [{COLUMN=STATE, row_number=3}, {COLUMN=STATE, row_number=8}, {COLUMN=STATE, row_number=12}, {COLUMN=STATE, row_number=24}, {COLUMN=STATE, row_number=41}]
+24/08/29 01:20:58 INFO data_quality_app: Null or blank count for EMP_ID : 0
+24/08/29 01:20:58 INFO data_quality_app: Null or blank count for FIRST_NAME : 495219
+24/08/29 01:21:04 INFO data_quality_app: Null or blank count for LAST_NAME : 495632
+24/08/29 01:21:10 INFO data_quality_app: Null or blank count for ADDRESS : 494902
+24/08/29 01:21:15 INFO data_quality_app: Null or blank count for CITY : 495008
+24/08/29 01:21:19 INFO data_quality_app: Null or blank count for STATE : 48742
+24/08/29 01:21:20 INFO data_quality_app: Null or blank count for COUNTRY : 0
+24/08/29 01:21:21 INFO data_quality_app: null_or_blank_check_alerts_count : 2029503
+24/08/29 01:21:21 INFO data_quality_app: [{COLUMN=FIRST_NAME, row_number=1}, {COLUMN=FIRST_NAME, row_number=4}, {COLUMN=FIRST_NAME, row_number=5}, {COLUMN=FIRST_NAME, row_number=6}, {COLUMN=FIRST_NAME, row_number=8}]
+24/08/29 01:23:38 INFO data_quality_app: Closed spark session and spark context

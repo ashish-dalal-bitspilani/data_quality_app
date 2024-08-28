@@ -1,7 +1,6 @@
 from lib.logger import Log4j
 from pyspark.sql import functions as F
 from pyspark.sql.window import Window
-from great_expectations.dataset 
 
 quality_control_alerts = {}
 
