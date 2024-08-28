@@ -1,0 +1,4 @@
+24/08/28 10:56:39 INFO data_quality_app: SparkSession variable : <pyspark.sql.session.SparkSession object at 0x0000025623FED010>
+24/08/28 10:56:39 INFO data_quality_app: sparkContext variable : <SparkContext master=local[*] appName=data_quality_app>
+24/08/28 10:57:00 INFO data_quality_app: QC checks completed smoothly
+24/08/28 10:57:00 INFO data_quality_app: Closed spark session and spark context
