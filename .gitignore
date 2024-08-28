@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/
 lib64/
 parts/
 sdist/
@@ -169,7 +169,10 @@ cython_debug/
 
 # Ignore all files in the temp directory
 /temp/*
-/data/*
+
+# Ignore all data heavy files
+*.csv
+
 
 # Ignore compiled Python files
 *.pyc
