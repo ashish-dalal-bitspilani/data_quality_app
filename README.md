@@ -22,14 +22,14 @@ As for the quality checks and expectations used, below checks were in-scope:
 Approach Steps :
 
 + Getting a dataframe with row_numbers 
-  * Justification : Although, we do have a monotonically increasing EMP_ID from 1 to 1000000 within the dataset, it is standard practice to have row numbers assigned to each row to make the code generic and reusable for cases where EMP_ID might be random, unique and might not follow any strict ordering structure
+  - Justification : Although, we do have a monotonically increasing EMP_ID from 1 to 1000000 within the dataset, it is standard practice to have row numbers assigned to each row to make the code generic and reusable for cases where EMP_ID might be random, unique and might not follow any strict ordering structure
     - For pyspark, this was achieved through Window() utility 
     - For python(pandas), this was obtained by simply adding a new column having range from 1 to length of the dataframe
     - For dask, it was reset of index from 1 to the length of the dataframe
 + Getting a great expectations dataframe for corresponding Spark and Pandas dataframes (This step was skipped for modules without GE)
 + Applying standard expectations on dataframes to get an expectation outcome (This step was skipped for modules without GE)
-  * Pyspark : Here the expectation outcome did not have unexpected index list due to the distributed nature of Spark, therefore, custom filtering of dataframe for fetching row numbers had to be added on top of GE standard expectation
-  * Pandas : Here, the unexpected index list was sufficient to locate the row numbers for composing the required result format
+  - Pyspark : Here the expectation outcome did not have unexpected index list due to the distributed nature of Spark, therefore, custom filtering of dataframe for fetching row numbers had to be added on top of GE standard expectation
+  - Pandas : Here, the unexpected index list was sufficient to locate the row numbers for composing the required result format
 + For modules minus of GE, custom filtering logic based on filter, string equivalence, null checks using na functions has been applied
 
 + Time Complexity and Considerations :
@@ -45,7 +45,7 @@ Assuming dataset has n rows , m columns ((1000000,7)in this case) and w worker n
 | Dask without GE| O((n*m)/w)|
 
 + Considerations for above time complexities:
-  * When comparing the time complexity of using PySpark vs pandas vs Dask to perform DQ checks on a column level for all columns of a DataFrame, there are key differences due to how PySpark/pandas/dask operate under the hood:
+  - When comparing the time complexity of using PySpark vs pandas vs Dask to perform DQ checks on a column level for all columns of a DataFrame, there are key differences due to how PySpark/pandas/dask operate under the hood:
     - Pandas operates on in-memory data, meaning it loads the entire dataset into RAM. This allows for faster access and operations on smaller datasets but can become slow or infeasible as the dataset size increases due to memory constraints.
 	- PySpark is designed for distributed processing. It processes data across multiple nodes in a cluster, making it more suitable for large-scale datasets that do not fit into memory.
 	- However, due to PySpark's distributed nature, the actual runtime depends on the parallelization across the cluster. If the data is evenly distributed and the cluster is well-utilized, the effective time complexity can be reduced depending on the number of workers
