@@ -34,11 +34,11 @@ Approach Steps :
 
 + Time Complexity and Considerations :
 Assuming dataset has n rows (1,000,000), m (in this case 7) columns and w worker nodes
-|Approach	|Time Complexity	|
-|:---   	|:--- 				|
-|Pyspark with GE|O((n*m)/w)|
-|Pandas with GE|O(n*m)|
-|Pyspark without GE|O((n*m)/w)|
-|Pandas without GE|O((n*m)/w)|
-|Dask without GE|O((n*m)/w)|
+| Approach	| Time Complexity	|
+| :---   	| :--- 				|
+| Pyspark with GE| O((n*m)/w)|
+| Pandas with GE| O(n*m)|
+| Pyspark without GE| O((n*m)/w)|
+| Pandas without GE| O((n*m)/w)|
+| Dask without GE| O((n*m)/w)|
 
