@@ -26,8 +26,19 @@ Approach Steps :
     - For pyspark, this was achieved through Window() utility 
     - For python(pandas), this was obtained by simply adding a new column having range from 1 to length of the dataframe
     - For dask, it was reset of index from 1 to the length of the dataframe
-+ Getting a great expectations dataframe for corresponding Spark and Pandas dataframes (This step skipped for modules without GE)
-+ Applying standard expectations on dataframes to get an expectation outcome
++ Getting a great expectations dataframe for corresponding Spark and Pandas dataframes (This step was skipped for modules without GE)
++ Applying standard expectations on dataframes to get an expectation outcome (This step was skipped for modules without GE)
   * Pyspark : Here the expectation outcome did not have unexpected index list due to the distributed nature of Spark, therefore, custom filtering of dataframe for fetching row numbers had to be added on top of GE standard expectation
   * Pandas : Here, the unexpected index list was sufficient to locate the row numbers for composing the required result format
 + For modules minus of GE, custom filtering logic based on filter, string equivalence, null checks using na functions has been applied
+
++ Time Complexity and Considerations :
+Assuming dataset has n rows (1,000,000), m (in this case 7) columns and w worker nodes
+|Approach	|Time Complexity	|
+|:---   	|:--- 				|
+|Pyspark with GE|O((n*m)/w)|
+|Pandas with GE|O(n*m)|
+|Pyspark without GE|O((n*m)/w)|
+|Pandas without GE|O((n*m)/w)|
+|Dask without GE|O((n*m)/w)|
+
