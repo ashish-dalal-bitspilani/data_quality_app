@@ -34,7 +34,7 @@ Approach Steps :
 
 + Time Complexity and Considerations :
 
-Assuming dataset has n rows (1,000,000), m (in this case 7) columns and w worker nodes
+Assuming dataset has n rows , m columns ((1000000,7)in this case) and w worker nodes
 
 | Approach	| Time Complexity	|
 |-----------|-------------------|
@@ -44,3 +44,14 @@ Assuming dataset has n rows (1,000,000), m (in this case 7) columns and w worker
 | Pandas without GE| O((n*m)/w)|
 | Dask without GE| O((n*m)/w)|
 
++ Considerations for above time complexities:
+  * When comparing the time complexity of using PySpark vs pandas vs Dask to perform DQ checks on a column level for all columns of a DataFrame, there are key differences due to how PySpark/pandas/dask operate under the hood:
+    - Pandas operates on in-memory data, meaning it loads the entire dataset into RAM. This allows for faster access and operations on smaller datasets but can become slow or infeasible as the dataset size increases due to memory constraints.
+	- PySpark is designed for distributed processing. It processes data across multiple nodes in a cluster, making it more suitable for large-scale datasets that do not fit into memory.
+	- However, due to PySpark's distributed nature, the actual runtime depends on the parallelization across the cluster. If the data is evenly distributed and the cluster is well-utilized, the effective time complexity can be reduced depending on the number of workers
+	- Pandas with Great Expectations does not have distributed computation capabilities, so all operations occur in a single process.
+	- PySpark introduces overhead in terms of job scheduling, network communication, and data shuffling, which can impact performance for smaller datasets. For very large datasets, these overheads are outweighed by the benefits of parallel processing.
+	- The primary difference without Great Expectations is that both pandas and PySpark will only involve the data processing frameworks' native performance characteristics, without any additional overhead from the validation and assertion processes that Great Expectations introduces.
+	- Dask has overhead related to task scheduling, data shuffling, and inter-worker communication, but it is often lighter than PySpark’s overhead due to Dask's more dynamic and flexible scheduler.
+	- Dask is more efficient than pandas for datasets that don't fit in memory and often more lightweight compared to PySpark for many tasks.
+	- The Great Expectations overhead is usually on the validation and assertion side, which is less significant in terms of order of complexity than the time complexity involved in the use of main libraries to perform the DQ checks
